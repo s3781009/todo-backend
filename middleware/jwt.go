@@ -17,10 +17,7 @@ func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
 				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 					return nil, fmt.Errorf("there was an error")
 				}
-				err := godotenv.Load(".env")
-				if err != nil {
-					panic(err.Error())
-				}
+
 				read, err := godotenv.Read(".env")
 				if err != nil {
 					panic(err.Error())

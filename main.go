@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -24,7 +23,6 @@ func main() {
 
 	err := app.Run("localhost:8000")
 	if err != nil {
-		fmt.Println("could not start sever")
 		panic(err.Error())
 	}
 }
