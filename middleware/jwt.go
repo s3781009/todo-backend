@@ -7,8 +7,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var Claims jwt.MapClaims
-
 func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if c.GetHeader("Authorization") != "" {
@@ -28,8 +26,7 @@ func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
 				fmt.Fprintf(c.Writer, err.Error())
 			}
 			if token.Valid {
-				Claims = claim
-				fmt.Println(Claims["sub"])
+				c.Set("token", claim["sub"])
 				endpoint(c)
 			}
 		} else {
