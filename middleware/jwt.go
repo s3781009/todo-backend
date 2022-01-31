@@ -20,7 +20,7 @@ func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
 				if err != nil {
 					panic(err.Error())
 				}
-				return []byte(read["AUTH0_CLIENT_SECRET"]), nil
+				return []byte(os.Getenv("AUTH0_CLIENT_SECRET"), nil
 			})
 			if err != nil {
 				fmt.Fprintf(c.Writer, err.Error())
