@@ -24,7 +24,7 @@ func main() {
 	}))
 	routes.Setup(app, connection)
 
-	err := app.Run(os.Getenv("PORT"))
+	err := app.Run(":" + os.Getenv("PORT"))
 	if err != nil {
 		log.Fatal("cannot start server", err)
 	}
