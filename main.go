@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
+	"log"
 	"os"
 	"todo-server/db"
 	"todo-server/routes"
@@ -22,8 +24,9 @@ func main() {
 	}))
 	routes.Setup(app, connection)
 
-	err := app.Run(":" + os.Getenv("PORT"))
+	err := app.Run(os.Getenv("PORT"))
 	if err != nil {
-		panic(err.Error())
+		log.Fatal("cannot start server", err)
 	}
+	fmt.Print("finished")
 }

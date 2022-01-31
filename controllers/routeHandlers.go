@@ -23,7 +23,7 @@ func PostItems(connection *sql.DB) gin.HandlerFunc {
 		var item models.Item
 		err := c.Bind(&item)
 		if err != nil {
-			c.JSON(500, err.Error())
+			c.JSON(500, "could not bind request with model")
 		}
 		c.JSON(200, item)
 		token, _ := c.Get("token")

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"os"
 )
 
 func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
@@ -16,7 +15,7 @@ func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
 					return nil, fmt.Errorf("there was an error")
 				}
 
-				return []byte(os.Getenv("AUTH0_CLIENT_SECRET")), nil
+				return []byte("LP2KXyA6ZZds3JDRY9XuGbUDrPWndPPq"), nil
 			})
 			if err != nil {
 				fmt.Fprintf(c.Writer, err.Error())
