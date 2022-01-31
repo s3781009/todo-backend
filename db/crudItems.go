@@ -7,7 +7,7 @@ import (
 )
 
 func CreateItem(connection *sql.DB, item models.Item, token string) {
-	_, err := connection.Query("INSERT INTO todos.todolist(id, text, completed,`date-created`,`user-id`) VALUES (?,?,?,?,?)",
+	_, err := connection.Query("INSERT INTO todos.todolist(id, text, completed,date_created,user_id) VALUES (?,?,?,?,?)",
 		item.Datetime+token, item.Text, item.Completed, item.Datetime, token)
 	if err != nil {
 		fmt.Println("could not create item in db")
@@ -17,7 +17,7 @@ func CreateItem(connection *sql.DB, item models.Item, token string) {
 
 func ReadItem(connection *sql.DB, token string) []models.Item {
 
-	rows, _ := connection.Query("SELECT text, completed, `date-created` FROM todos.todolist WHERE `user-id`= ?", token)
+	rows, _ := connection.Query("SELECT text, completed, date_created FROM todos.todolist WHERE user_id= ?", token)
 	var items []models.Item
 	for rows.Next() {
 		var item models.Item
@@ -33,7 +33,7 @@ func ReadItem(connection *sql.DB, token string) []models.Item {
 
 func UpdateItem(connection *sql.DB, item models.Item, token string) {
 	//todo
-	_, err := connection.Query("UPDATE todos.todolist SET `text` = ? WHERE id = ?", item.Text, item.Datetime+token)
+	_, err := connection.Query("UPDATE todos.todolist SET text = ? WHERE id = ?", item.Text, item.Datetime+token)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
