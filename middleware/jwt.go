@@ -2,6 +2,8 @@ package middleware
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -18,7 +20,7 @@ func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
 
 				read, err := godotenv.Read(".env")
 				if err != nil {
-					panic(err.Error())
+					log.Fatal("cannot read env")
 				}
 				return []byte(read["AUTH0_CLIENT_SECRET"]), nil
 			})

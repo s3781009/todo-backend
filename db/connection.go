@@ -2,15 +2,29 @@ package db
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
+
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
+func dbEnv(key string) string {
+
+	env, _ := godotenv.Read(".env")
+	secret := env[key]
+	return secret
+}
 func Connect() *sql.DB {
-	var connection, err = sql.Open("mysql", "root:2001@tcp(127.0.0.1:3306)/todo")
+
+	var connection, err = sql.Open("postgres", dbEnv("DATABASE_URL"))
 	if err != nil {
-		panic(err.Error())
+		log.Fatal("cannot connect to db", err)
 	}
-	fmt.Println("connected to db")
+	err = connection.Ping()
+	if err != nil {
+		log.Fatal("cannot ping", err)
+	}
+	
 	return connection
 }

@@ -22,7 +22,7 @@ func main() {
 	}))
 	routes.Setup(app, connection)
 
-	err := app.Run(":" + os.Getenv("PORT"))
+	err := app.Run(":8000" + os.Getenv("PORT"))
 	if err != nil {
 		panic(err.Error())
 	}
