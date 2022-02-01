@@ -2,9 +2,11 @@ package middleware
 
 import (
 	"fmt"
+
+	"os"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"os"
 )
 
 func IsAuthorized(endpoint func(c *gin.Context)) gin.HandlerFunc {
