@@ -2,7 +2,6 @@ package db
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"todo-server/models"
 )
@@ -18,7 +17,7 @@ func CreateItem(connection *sql.DB, item models.Item, token string) {
 func ReadItem(connection *sql.DB, token string) []models.Item {
 
 	rows, e := connection.Query("SELECT text, completed, date_created FROM todos.todolist  WHERE user_id= $1", token)
-	if e!=nil{
+	if e != nil {
 		log.Fatal(e)
 	}
 	var items []models.Item
@@ -34,10 +33,9 @@ func ReadItem(connection *sql.DB, token string) []models.Item {
 }
 
 func UpdateItem(connection *sql.DB, item models.Item, token string) {
-	//todo
-	_, err := connection.Query("UPDATE todos.todolist SET text = $1 WHERE id = $2", item.Text, item.Datetime+token)
+	_, err := connection.Query("UPDATE todos.todolist SET text = $1 ,completed = $2 WHERE id = $3", item.Text, item.Completed, item.Datetime+token)
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Fatal("cannot update item in db", err)
 	}
 }
 func DeleteItem(connection *sql.DB, item models.Item, token string) {
