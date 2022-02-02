@@ -14,6 +14,8 @@ func Setup(r *gin.Engine, connection *sql.DB) {
 
 	r.POST("/api/items", middleware.IsAuthorized(controllers.PostItems(connection)))
 
+	r.PATCH("/api/items", middleware.IsAuthorized(controllers.UpdateItem(connection)))
+
 	r.DELETE("api/items", middleware.IsAuthorized(controllers.DeleteItem(connection)))
 
 }
