@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -15,8 +14,10 @@ func main() {
 
 	connection := db.Connect()
 	app := gin.Default()
+
+	//cors middleware
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},
+		AllowOrigins:     []string{"*"}, //allow cross-origin request
 		AllowMethods:     []string{"PUT", "PATCH", "GET", "POST", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -28,5 +29,4 @@ func main() {
 	if err != nil {
 		log.Fatal("cannot start server", err)
 	}
-	fmt.Print("finished")
 }

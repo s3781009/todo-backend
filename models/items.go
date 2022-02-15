@@ -1,7 +1,5 @@
 package models
 
-// Items init item var as a slice
-
 // Item items Struct (Model)
 type Item struct {
 	Id        string `gorm:"type:varchar(255)"`

@@ -8,7 +8,6 @@ import (
 )
 
 func Setup(r *gin.Engine, connection *sql.DB) {
-	//r.GET("/api/register", controllers.Register)
 
 	r.GET("api/items", middleware.IsAuthorized(controllers.GetItems(connection)))
 

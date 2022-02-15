@@ -8,6 +8,7 @@ import (
 	"todo-server/models"
 )
 
+//  token key is the sub claim from the verified access token which was set in jwt
 func GetItems(connection *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token, _ := c.Get("token")
